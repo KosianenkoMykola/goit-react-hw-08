@@ -1,0 +1,22 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.item {
+  width: 300px;
+  list-style: none;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background-color: #d3d3d3;
+  box-shadow:  3px 9px 17px 0px rgba(137, 137, 137, 0.3);
+  transition: box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.item:hover {
+  box-shadow: 2px 3px 10px 0px rgba(31, 31, 31, 0.3);
+}

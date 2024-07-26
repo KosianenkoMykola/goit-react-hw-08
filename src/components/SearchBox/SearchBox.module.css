@@ -1,0 +1,27 @@
+.container {
+    margin-top: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.label {
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input {
+    border: 1px solid rgb(185, 185, 185);
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.searchIcon {
+    width: 20px;
+    height: 25px;
+}
