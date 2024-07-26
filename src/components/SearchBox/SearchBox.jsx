@@ -6,9 +6,10 @@ import { changeFilter } from "../../redux/filters/slice";
 import { selectNameFilter } from "../../redux/filters/selectors";
 
 export default function SearchBox() {
-  const id = useId()
+  const idName = useId()
   const dispatch = useDispatch();
-  const filter = useSelector(selectNameFilter)
+  const nameFilter = useSelector(selectNameFilter)
+
 
   const handleChange = (e) => {
     dispatch(changeFilter(e.target.value))
@@ -16,13 +17,13 @@ export default function SearchBox() {
 
     return (
       <div className={css.container}>
-        <label className={css.label} htmlFor={id}>Find contacts by name<MdPersonSearch className={css.searchIcon}/>
+        <label className={css.label} htmlFor={idName}>Find contacts by name<MdPersonSearch className={css.searchIcon}/>
         </label>
         <input
         className={css.input}
-          id={id}
+          id={idName}
           type="text"
-          value={filter}
+          value={nameFilter}
           onChange={handleChange}/>
       </div>
     );

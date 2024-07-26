@@ -8,9 +8,9 @@ export default function HomePage() {
 
       <div className={css.container}>
         <h1 className={css.title}>
-          Task manager welcome page{' '}
+          Your Phonebook{' '}
           <span role="img" aria-label="Greeting icon">
-            💁‍♀️
+            📲
           </span>
         </h1>
       </div>
