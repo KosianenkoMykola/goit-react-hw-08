@@ -23,7 +23,7 @@ export default function ContactForm() {
       .max(50, "Too Long!")
       .required("Required"),
     number: Yup.string()
-      .matches(/^\d{3}-\d{3}-\d{4}$/, "Valid phone number: XXX-XXX-XXXX")
+      .matches(/^\d{3}-\d{2}-\d{2}$/, "Valid phone number: XXX-XX-XX")
       .min(3, "Too Short!")
       .max(50, "Too Long!")
       .required("Required"),
