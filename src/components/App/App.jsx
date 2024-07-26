@@ -6,8 +6,8 @@ import ContactList from "../ContactList/ContactList";
 import { TiContacts } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { fetchAll } from "../../redux/contactsOps";
-import { selectError, selectLoading } from "../../redux/contactsSlice";
+import { fetchAll } from "../../redux/contacts/operations";
+import { selectError, selectLoading } from "../../redux/contacts/slice";
 import { ThreeDots } from 'react-loader-spinner'
 
 
