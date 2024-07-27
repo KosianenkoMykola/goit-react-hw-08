@@ -19,7 +19,6 @@ export const RegisterForm = () => {
       validationSchema={validationSchema}
       onSubmit={(values, { resetForm }) => {
         dispatch(register(values))
-          .unwrap()
           .then(() => {
             console.log('Registration success');
           })
