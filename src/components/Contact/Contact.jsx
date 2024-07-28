@@ -1,65 +1,68 @@
-import css from './Contact.module.css';
-import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaUser, FaPhoneAlt } from 'react-icons/fa';
-import { useDispatch } from 'react-redux';
-import { deleteContacts } from '../../redux/contacts/operations';
-import DeleteModal from '../DeleteModal/DeleteModal'
+import { deleteContacts, editContact } from '../../redux/contacts/operations';
+import { openDeleteModal, closeDeleteModal, openEditModal, closeEditModal } from '../../redux/contacts/slice';
+import DeleteModal from '../DeleteModal/DeleteModal';
 import EditContactModal from '../EditContactModal/EditContactModal';
+import css from './Contact.module.css';
 
 export default function Contact({ data: { id, name, number } }) {
   const dispatch = useDispatch();
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [contactData, setContactData] = useState({ id, name, number });
+  const { deleteModalOpen, editModalOpen, currentContact } = useSelector((state) => state.contacts);
 
-  const handleOpenDeleteModal = () => setIsDeleteModalOpen(true);
-  const handleCloseDeleteModal = () => setIsDeleteModalOpen(false);
-
-  const handleOpenEditModal = () => setIsEditModalOpen(true);
-  const handleCloseEditModal = () => setIsEditModalOpen(false);
-
-  const handleEditContact = (values) => {
-    setContactData({ ...contactData, name: values.name, number: values.phone });
-    handleCloseEditModal();
-  };
+  const handleOpenDeleteModal = () => dispatch(openDeleteModal({ id, name, number }));
+  const handleCloseDeleteModal = () => dispatch(closeDeleteModal());
+  
+  const handleOpenEditModal = () => dispatch(openEditModal({ id, name, number }));
+  const handleCloseEditModal = () => dispatch(closeEditModal());
 
   const handleDeleteContact = () => {
     dispatch(deleteContacts(id));
     handleCloseDeleteModal();
   };
 
+  const handleEditContact = (values) => {
+  const updatedData = { name: values.name, number: values.phone };
+  dispatch(editContact({ contactsId: id, updatedData }));
+  handleCloseEditModal();
+};
+
   return (
     <div className={css.contactContainer}>
-    <div className={css.title}>
-      <p className={css.userName}>
-        <FaUser className={css.icon} />
-        {contactData.name}
-      </p>
-      <div className={css.separator} />
-      <p>
-        <FaPhoneAlt className={css.icon} />
-        {contactData.number}
-      </p>
+      <div className={css.title}>
+        <p className={css.userName}>
+          <FaUser className={css.icon} />
+          {name}
+        </p>
+        <div className={css.separator} />
+        <p>
+          <FaPhoneAlt className={css.icon} />
+          {number}
+        </p>
+      </div>
+      <div className={css.buttonContainer}>
+        <button className={css.editBtn} onClick={handleOpenEditModal}>
+          Edit
+        </button>
+        <button className={css.btn} onClick={handleOpenDeleteModal}>
+          Delete
+        </button>
+      </div>
+      {deleteModalOpen && currentContact.id === id && (
+        <DeleteModal 
+          open={deleteModalOpen} 
+          handleClose={handleCloseDeleteModal} 
+          handleDelete={handleDeleteContact} 
+        />
+      )}
+      {editModalOpen && currentContact.id === id && (
+        <EditContactModal 
+          open={editModalOpen} 
+          handleClose={handleCloseEditModal} 
+          handleSave={handleEditContact} 
+          initialValues={{ name: currentContact.name, phone: currentContact.number }} 
+        />
+      )}
     </div>
-    <div className={css.buttonContainer}>
-      <button className={css.editBtn} onClick={handleOpenEditModal}>
-        Edit
-      </button>
-      <button className={css.btn} onClick={handleOpenDeleteModal}>
-        Delete
-      </button>
-    </div>
-    <DeleteModal 
-      open={isDeleteModalOpen} 
-      handleClose={handleCloseDeleteModal} 
-      handleDelete={handleDeleteContact} 
-    />
-    <EditContactModal 
-      open={isEditModalOpen} 
-      handleClose={handleCloseEditModal} 
-      handleSave={handleEditContact} 
-      initialValues={{ name: contactData.name, phone: contactData.number }} 
-    />
-  </div>
   );
 }

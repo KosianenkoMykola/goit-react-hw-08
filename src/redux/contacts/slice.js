@@ -1,15 +1,36 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addContacts, deleteContacts, fetchAll } from '../contacts/operations';
+import { addContacts, deleteContacts, fetchAll, editContact } from './operations';
 
 const contactsSlice = createSlice({
-    name: 'contacts',
-    initialState: {
-      items: [],
-      loading: false,
-      error: false
+  name: 'contacts',
+  initialState: {
+    items: [],
+    loading: false,
+    error: false,
+    deleteModalOpen: false,
+    editModalOpen: false,
+    currentContact: null,
+  },
+  reducers: {
+    openDeleteModal(state, action) {
+      state.deleteModalOpen = true;
+      state.currentContact = action.payload;
     },
-    extraReducers: (builder) => {
-      builder
+    closeDeleteModal(state) {
+      state.deleteModalOpen = false;
+      state.currentContact = null;
+    },
+    openEditModal(state, action) {
+      state.editModalOpen = true;
+      state.currentContact = action.payload;
+    },
+    closeEditModal(state) {
+      state.editModalOpen = false;
+      state.currentContact = null;
+    },
+  },
+  extraReducers: (builder) => {
+    builder
       .addCase(fetchAll.pending, (state) => {
         state.loading = true;
         state.error = false;
@@ -48,7 +69,23 @@ const contactsSlice = createSlice({
         state.loading = false;
         state.error = true;
       })
-    }
-  });
+      .addCase(editContact.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(editContact.fulfilled, (state, action) => {
+        const index = state.items.findIndex((item) => item.id === action.payload.id);
+        if (index !== -1) {
+          state.items[index] = action.payload;
+        }
+        state.loading = false;
+      })
+      .addCase(editContact.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
+      });
+  }
+});
 
+export const { openDeleteModal, closeDeleteModal, openEditModal, closeEditModal } = contactsSlice.actions;
 export default contactsSlice.reducer;

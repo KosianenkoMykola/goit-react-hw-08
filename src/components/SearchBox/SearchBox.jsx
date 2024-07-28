@@ -17,7 +17,7 @@ export default function SearchBox() {
     return (
       <div className={css.container}>
         <input
-        placeholder="Find contacts by name"
+        placeholder="Find contacts"
         className={css.input}
           id={idName}
           type="text"
