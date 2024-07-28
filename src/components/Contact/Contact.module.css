@@ -55,3 +55,19 @@ p {
 .btn:hover {
   background-color: #ca4639;
 }
+
+.editBtn {
+  margin-right: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: background-color 0.3s;
+}
+
+.editBtn:hover, .editBtn:focus {
+  background-color: #0056b3;
+}
