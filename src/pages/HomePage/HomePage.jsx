@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import DocumentTitle from '../../components/DocumentTitle';
 import css from '../HomePage/HomePage.module.css'
 
@@ -13,6 +14,9 @@ export default function HomePage() {
             📲
           </span>
         </h1>
+        <NavLink className={css.link} to="/login">
+        Go to Log In
+      </NavLink>
       </div>
     </>
   );

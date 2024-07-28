@@ -14,7 +14,7 @@
     color: #333;
     outline: none;
     transition: border-color 0.3s;
-    width: 100%;
+    min-width: 230px;
   }
   
   .input:focus {

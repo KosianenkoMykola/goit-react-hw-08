@@ -35,6 +35,7 @@ export const logIn = createAsyncThunk(
       setAuthHeader(res.data.token);
       return res.data;
     } catch (error) {
+      toast.error('Log In failed. Please try again.');
       return thunkAPI.rejectWithValue(error.message);
     }
   }

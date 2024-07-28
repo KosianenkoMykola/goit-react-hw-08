@@ -30,6 +30,7 @@
     text-transform: uppercase;
     font-weight: 200;
     border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
   }
   
   .deleteBtn:hover,   
@@ -46,6 +47,7 @@
     text-transform: uppercase;
     font-weight: 200;
     border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
   }
 
   .backBtn:hover,   

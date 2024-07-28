@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 axios.defaults.baseURL = "https://connections-api.goit.global/";
 
@@ -20,8 +21,10 @@ export const addContacts = createAsyncThunk(
     async (newContacts, thunkAPI) => {
       try {
         const response = await axios.post("/contacts", newContacts);
+        toast.success('Contact added');
         return response.data;
       } catch (error) {
+        toast.error('Error');
         return thunkAPI.rejectWithValue(error.message);
       }
     }
@@ -31,6 +34,7 @@ export const deleteContacts = createAsyncThunk("contacts/deleteContacts",
     async (contactsId, thunkAPI) => {
         try {
             const response = await axios.delete(`/contacts/${contactsId}`);
+            toast.success('Contact Delete')
             return response.data;
         } catch (error) {
             return thunkAPI.rejectWithValue(error.message);
