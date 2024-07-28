@@ -1,13 +1,3 @@
-.container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 5px 10px;
-    background-color: #fff;
-    max-width: 400px;
-    margin: 10px auto 20px auto;
-  }
-  
   .label {
     font-size: 1rem;
     color: #333;
@@ -16,15 +6,9 @@
     align-items: center;
   }
   
-  .searchIcon {
-    margin-left: 8px;
-    color: #61dafb;
-  }
-  
   .input {
-    flex: 1;
-    padding: 5px;
-    border: 1px solid #ddd;
+    padding: 6px;
+    border: transparent;
     border-radius: 4px;
     font-size: 0.875rem;
     color: #333;
