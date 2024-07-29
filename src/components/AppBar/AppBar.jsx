@@ -4,15 +4,17 @@ import { useSelector } from 'react-redux';
 import {AuthNav} from '../AuthNav/AuthNav';
 import {selectIsLoggedIn} from '../../redux/auth/selectors';
 import css from '../AppBar/AppBar.module.css';
-import SearchBox from '../SearchBox/SearchBox';
+import SearchBox from '../../components/SearchBox/SearchBox'
+import { useLocation } from 'react-router-dom';
 
 export const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
+  const location = useLocation();
 
   return (
     <header className={css.header}>
       <Navigation />
-      {isLoggedIn && <SearchBox />}
+      {location.pathname === '/contacts' && <SearchBox />}
       {isLoggedIn ? <UserMenu /> : <AuthNav />}
     </header>
   );

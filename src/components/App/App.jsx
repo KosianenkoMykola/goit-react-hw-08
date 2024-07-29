@@ -6,6 +6,7 @@ import { PrivateRoute } from '../PrivateRoute';
 import { RestrictedRoute } from '../RestrictedRoute';
 import { refreshUser } from '../../redux/auth/operations';
 import { selectIsRefreshing } from '../../redux/auth/selectors';
+import { PropagateLoader } from 'react-spinners'
 import css from '../App/App.module.css'
 
 const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
@@ -22,7 +23,7 @@ export const App = () => {
   }, [dispatch]);
 
   return isRefreshing ? (
-    <b className={css.loader}>Refreshing user...</b>
+    <div className={css.loader}><PropagateLoader color="#2501ff" size={25} speedMultiplier={2}/></div>
   ) : (
     
     <Layout>

@@ -5,7 +5,8 @@ import ContactList from '../../components/ContactList/ContactList'
 import ContactForm from '../../components/ContactForm/ContactForm';
 import { fetchAll } from '../../redux/contacts/operations';
 import { selectLoading } from '../../redux/contacts/selectors';
-import css from '../ContactsPage/ContactsPage.module.css'
+import css from '../ContactsPage/ContactsPage.module.css';
+import { PropagateLoader } from 'react-spinners'
 
 export default function TasksPage() {
   const dispatch = useDispatch();
@@ -19,8 +20,7 @@ export default function TasksPage() {
     <>
       <DocumentTitle>Your contacts</DocumentTitle>
       <ContactForm />
-      <div className={css.loader}>{isLoading && 'Request in progress...'}</div>
-      <ContactList />
+      {isLoading ? <div className={css.loader}><PropagateLoader color="#2501ff" size={25} speedMultiplier={2}/></div> : <ContactList />}
      </>
   );
 }
